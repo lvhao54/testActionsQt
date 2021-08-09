@@ -35,7 +35,7 @@ jobs:
       - name: package
         run: |
           # 拷贝依赖
-          macdeployqt build/release/${targetName}.app -qmldir=. -verbose=1 -dmg
+          macdeployqt build/${targetName}.app -qmldir=. -verbose=1 -dmg
 
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
@@ -49,7 +49,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/release/${{ env.targetName }}.dmg
+          file: build/${{ env.targetName }}.dmg
           asset_name: ${{ env.targetName }}_${{ matrix.os }}_${{ matrix.qt_ver }}.dmg
           tag: ${{ github.ref }}
           overwrite: true
