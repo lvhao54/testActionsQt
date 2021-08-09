@@ -10,8 +10,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04]
-        qt_ver: [5.9.9,5.12.10,5.15.2]
+        os: [ubuntu-20.04]
+        qt_ver: [5.15.2]
         qt_arch: [gcc_64]
     steps:
       - name: Install Qt
@@ -33,9 +33,9 @@ jobs:
           mkdir build && cd build
           cmake ..
           make
-          
+
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}}.zip
-          path: bin/release/${{ env.targetName }}.app
+          path: build/
