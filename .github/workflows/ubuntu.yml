@@ -20,13 +20,22 @@ jobs:
           version: ${{ matrix.qt_ver }}
           modules: 'qtcharts'
           cached: 'false'
+
       - name: ubuntu install GL library
         run: sudo apt-get install -y libglew-dev libglfw3-dev
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+
       - name: build ubuntu
         run: |
           mkdir build && cd build
           cmake ..
           make
+          
+      # 上传artifacts          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}}.zip
+          path: bin/release/${{ env.targetName }}.app
