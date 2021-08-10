@@ -51,8 +51,7 @@ jobs:
           cd build
           pwd
           ls
-          ../linuxdeployqt testActionsQt
-          #  -appimage
+          ../linuxdeployqt testActionsQt -appimage
 
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
