@@ -88,8 +88,8 @@ jobs:
         if: matrix.platform == 'macos-latest'
         run: |
           brew install protobuf grpc ninja pkg-config openssl
-          git clone https://github.com/Qv2ray/macdeployqt-patched
-          cd macdeployqt-patched
+          # git clone https://github.com/Qv2ray/macdeployqt-patched
+          # cd macdeployqt-patched
           mkdir build; cd build;
           cmake .. -DCMAKE_BUILD_TYPE=Release; cmake --build .
           cp -v ./macdeployqt ${Qt5_DIR}/bin/macdeployqt
@@ -100,12 +100,12 @@ jobs:
         with:
           # ninja version to download. Default: 1.10.0
           version: 1.10.0
-      - name: Win-${{ matrix.arch }} - ${{ matrix.qt_version }} - Build preparation - Download Dependencies
-        shell: bash
-        if: matrix.platform == 'windows-latest'
-        run: |
-          cd ./libs
-          ./setup-libs.sh windows ${{ matrix.arch }}
+      # - name: Win-${{ matrix.arch }} - ${{ matrix.qt_version }} - Build preparation - Download Dependencies
+      #   shell: bash
+      #   if: matrix.platform == 'windows-latest'
+      #   run: |
+      #     cd ./libs
+      #     ./setup-libs.sh windows ${{ matrix.arch }}
       # ========================================================================================================= Generate MakeFile and Build
       - uses: actions/setup-node@v1
         if: matrix.platform == 'macos-latest'
