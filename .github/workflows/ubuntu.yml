@@ -39,10 +39,9 @@ jobs:
       - name: package
         run: |
           # 拷贝依赖
-
           wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-          chmod +x linuxdeployqt-x86_64.AppImage
-          mv linuxdeployqt-x86_64.AppImage linuxdeployqt
+          chmod +x linuxdeployqt-continuous-x86_64.AppImage
+          mv linuxdeployqt-continuous-x86_64.AppImage linuxdeployqt
           mv linuxdeployqt /usr/local/bin
           linuxdelpoyqt --version
 

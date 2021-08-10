@@ -35,7 +35,8 @@ jobs:
       - name: package
         run: |
           # 拷贝依赖
-          macdeployqt build/${targetName}.app -qmldir=. -verbose=1 -dmg
+          pwd
+          macdeployqt ./${targetName}.app -qmldir=. -verbose=1 -dmg
 
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
