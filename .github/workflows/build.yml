@@ -2,8 +2,7 @@ name: Build CI
 
 on:
   push:
-  release:
-    types: [published]
+    branches: [main]
 
 jobs:
   build:
