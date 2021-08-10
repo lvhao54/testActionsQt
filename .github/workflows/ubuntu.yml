@@ -43,14 +43,12 @@ jobs:
           chmod +x linuxdeployqt-continuous-x86_64.AppImage
           mv linuxdeployqt-continuous-x86_64.AppImage linuxdeployqt
           # mv linuxdeployqt /usr/local/bin
-          pwd
-          ls
-          ./linuxdeployqt --version
-          cd build
-          pwd
-          ls
 
-          ../linuxdeployqt testActionsQt -appimage
+          ./linuxdeployqt --version
+
+          cd build
+          ../linuxdeployqt testActionsQt
+          #  -appimage
 
       # 上传artifacts          
       - uses: actions/upload-artifact@v2

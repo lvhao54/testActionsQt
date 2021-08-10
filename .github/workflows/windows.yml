@@ -64,7 +64,7 @@ jobs:
         run: |
           pwd
           dir
-          ${env:Qt5_Dir}/bin/windeployqt.exe ${env:targetName} -qmldir=${env:QML2_IMPORT_PATH}
+          ${env:Qt5_Dir}\bin\windeployqt.exe ${env:targetName}.exe -qmldir=${env:QML2_IMPORT_PATH}
           dir
 
       # tag 查询github-Release

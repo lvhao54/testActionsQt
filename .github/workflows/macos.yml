@@ -37,7 +37,7 @@ jobs:
           # 拷贝依赖
           pwd
           cd build
-          dir
+          ls
           macdeployqt ${env:targetName}.app -qmldir=${env:QML2_IMPORT_PATH} -verbose=1 -dmg
 
       # # 上传artifacts          
