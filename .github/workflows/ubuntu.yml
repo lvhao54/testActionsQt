@@ -45,9 +45,12 @@ jobs:
           # mv linuxdeployqt /usr/local/bin
           pwd
           ls
-          ./linuxdelpoyqt --version
+          ./linuxdeployqt --version
+          cd build
+          pwd
+          ls
 
-          # linuxdeployqt cleanRobot -appimage
+          ../linuxdeployqt testActionsQt -appimage
 
       # 上传artifacts          
       - uses: actions/upload-artifact@v2
