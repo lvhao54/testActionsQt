@@ -52,7 +52,7 @@ jobs:
           cd build
           cmake ..
           dir
-          cmake --build . Release
+          cmake --build . --config Release
           dir
           cd Release
           dir
