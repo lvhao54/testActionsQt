@@ -50,7 +50,7 @@ jobs:
 
           cd build
           pwd
-          cp default.desktop ./
+          cp ../default.desktop ./
           ls
           ../linuxdeployqt testActionsQt -appimage
 
