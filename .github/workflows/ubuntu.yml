@@ -44,7 +44,8 @@ jobs:
           mv linuxdeployqt-continuous-x86_64.AppImage linuxdeployqt
           # mv linuxdeployqt /usr/local/bin
           pwd
-          linuxdelpoyqt --version
+          ls
+          ./linuxdelpoyqt --version
 
           # linuxdeployqt cleanRobot -appimage
 
