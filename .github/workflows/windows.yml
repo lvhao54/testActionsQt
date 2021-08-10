@@ -37,35 +37,88 @@ jobs:
           modules: 'qtcharts'
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
+
+      - name: Install MSVC compiler
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          # 14.1 is for vs2017, 14.2 is vs2019, following the upstream vcpkg build from Qv2ray-deps repo
+          toolset: 14.2
+          arch: ${{ matrix.msvc_arch }}
+
+      - name: Win-${{ matrix.msvc_arch }} - ${{ matrix.qt_ver }} - Setup Ninja
+        if: matrix.platform == 'windows-latest'
+        uses: ashutoshvarma/setup-ninja@master
+        with:
+          # ninja version to download. Default: 1.10.0
+          version: 1.10.0   
+      - name: Win-${{ matrix.msvc_arch }} - ${{ matrix.qt_ver }} - Build preparation - Download Dependencies
+        shell: bash
+        if: matrix.platform == 'windows-latest'
+        run: |
+          curl -o ./libs/Qv2ray-deps-grpc-${{ matrix.msvc_arch }}-windows.7z -L https://github.com/Qv2ray/Qv2ray-deps/releases/download/release/Qv2ray-deps-grpc-${{ matrix.arch }}-windows.7z
+      - name: Win-${{ matrix.msvc_arch }} - Build preparation - Extract Dependencies
+        if: matrix.platform == 'windows-latest'
+        uses: DuckSoft/extract-7z-action@v1.0
+        with:
+          pathSource: ./libs/Qv2ray-deps-grpc-${{ matrix.msvc_arch }}-windows.7z
+          pathTarget: ./libs
+
       # 拉取代码
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
-      # msvc编译
-      - name: cmake-build
-        id: build
-        shell: cmd
+      # # msvc编译
+      # - name: cmake-build
+      #   id: build
+      #   shell: cmd
+      #   run: |
+      #     pwd
+      #     mkdir build
+      #     cd build
+      #     cmake ..
+      #     dir
+      #     cmake --build . --config Release
+      #     dir
+      #     cd Release
+      #     dir
+
+      - name: Windows - ${{ matrix.qt_ver }} - Generate Dependencies and Build
+        shell: bash
+        if: matrix.platform == 'windows-latest'
+        env:
+          CC: cl.exe
+          CXX: cl.exe
         run: |
-          pwd
           mkdir build
           cd build
-          cmake ..
-          dir
-          cmake --build . --config Release
-          dir
-          cd Release
-          dir
+          cmake .. -GNinja -DCMAKE_INSTALL_PREFIX=./deployment -DCMAKE_BUILD_TYPE=Release
+          cmake --build . --parallel $(nproc)
+          cmake --install .
+
+      - name: Win-${{ matrix.qt_arch }} - ${{ matrix.qt_ver }} - Create 7z Release
+        if: matrix.platform == 'windows-latest'
+        uses: DuckSoft/create-7z-action@v1.0
+        with:
+          pathSource: ./build/deployment/
+          pathTarget: ./release.7z
+      - name: Win-${{ matrix.qt_arch }} - ${{ matrix.qt_ver }} - Uploading artifact
+        if: matrix.platform == 'windows-latest'
+        uses: actions/upload-artifact@master
+        with:
+          name: Qv2ray-${{ github.sha }}.Windows-${{ matrix.qt_arch }}.qt${{ matrix.qt_ver }}.7z
+          path: release.7z
 
       # 打包 
-      - name: package
-        id: package       
-        shell: pwsh
-        run: |
-          pwd
-          dir
-          ${{env.Qt5_Dir}}\bin\windeployqt.exe ${{env.targetName}} -qmldir=${{env.QML2_IMPORT_PATH}}
-          dir
+      # - name: package
+      #   id: package       
+      #   shell: pwsh
+      #   run: |
+      #     pwd
+      #     dir
+      #     cd build
+      #     ${{env.Qt5_Dir}}\bin\windeployqt.exe ${{env.targetName}} -qmldir=${{env.QML2_IMPORT_PATH}}
+      #     dir
 
       # tag 查询github-Release
       # 上传artifacts          
