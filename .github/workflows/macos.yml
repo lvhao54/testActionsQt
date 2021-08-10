@@ -42,11 +42,11 @@ jobs:
           ls
           macdeployqt ${{env.targetName}} -qmldir=${{env.QML2_IMPORT_PATH}} -verbose=1 -dmg
 
-      # # 上传artifacts          
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}}.zip
-      #     path: build/release/${{ env.targetName }}.app
+      # 上传artifacts          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.targetName }}_${{ matrix.os }}_${{matrix.qt_ver}}.zip
+          path: build/release/${{ env.targetName }}.app
 
       # # tag 上传Release
       # - name: uploadRelease
