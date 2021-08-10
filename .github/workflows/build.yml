@@ -79,7 +79,7 @@ jobs:
           CC: /usr/bin/gcc-9
           CXX: /usr/bin/g++-9
         run: |
-          # cd src/3rdparty/extra-cmake-modules
+          cd src/3rdparty/extra-cmake-modules
           mkdir build
           cd build
           cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_HTML_DOCS=OFF -DBUILD_MAN_DOCS=OFF -DBUILD_QTHELP_DOCS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=/usr
@@ -92,7 +92,7 @@ jobs:
           CC: /usr/bin/gcc-9
           CXX: /usr/bin/g++-9
         run: |
-          # cd src/3rdparty/syntax-highlighting
+          cd src/3rdparty/syntax-highlighting
           mkdir build
           cd build
           cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_HTML_DOCS=OFF -DBUILD_MAN_DOCS=OFF -DBUILD_QTHELP_DOCS=OFF -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=/usr
@@ -167,7 +167,7 @@ jobs:
           CXX: cl.exe
         run: |
           set VCINSTALLDIR="C:\Program Files (x86)\Microsoft Visual Studio 16.0\VC"
-          # cd src/3rdparty/extra-cmake-modules
+          cd src/3rdparty/extra-cmake-modules
           mkdir build
           cd build
           cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_HTML_DOCS=OFF -DBUILD_MAN_DOCS=OFF -DBUILD_QTHELP_DOCS=OFF -DBUILD_TESTING=OFF
@@ -179,7 +179,7 @@ jobs:
           CC: cl.exe
           CXX: cl.exe
         run: |
-          # cd src/3rdparty/syntax-highlighting
+          cd src/3rdparty/syntax-highlighting
           mkdir build
           cd build
           cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_HTML_DOCS=OFF -DBUILD_MAN_DOCS=OFF -DBUILD_QTHELP_DOCS=OFF -DBUILD_TESTING=OFF
@@ -225,7 +225,7 @@ jobs:
         shell: bash
         run: |
           brew install ninja
-          # cd src/3rdparty/extra-cmake-modules
+          cd src/3rdparty/extra-cmake-modules
           mkdir build
           cd build
           cmake .. -GNinja -DBUILD_HTML_DOCS=OFF -DBUILD_MAN_DOCS=OFF -DBUILD_QTHELP_DOCS=OFF -DBUILD_TESTING=OFF
@@ -234,7 +234,7 @@ jobs:
       - name: MacOS - Build syntax highlight
         if: matrix.platform == 'macos-latest'
         run: |
-          # cd src/3rdparty/syntax-highlighting
+          cd src/3rdparty/syntax-highlighting
           mkdir build
           cd build
           cmake .. -GNinja -DBUILD_HTML_DOCS=OFF -DBUILD_MAN_DOCS=OFF -DBUILD_QTHELP_DOCS=OFF -DBUILD_TESTING=OFF
