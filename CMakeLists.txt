@@ -24,7 +24,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Charts REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core Quick Charts REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Charts REQUIRED)
 
 set(PROJECT_SOURCES
