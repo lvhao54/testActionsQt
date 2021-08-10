@@ -40,7 +40,7 @@ jobs:
           cd build
           pwd
           ls
-          macdeployqt ${env:targetName} -qmldir=${env:QML2_IMPORT_PATH} -verbose=1 -dmg
+          macdeployqt ${env.targetName} -qmldir=${env.QML2_IMPORT_PATH} -verbose=1 -dmg
 
       # # 上传artifacts          
       # - uses: actions/upload-artifact@v2
